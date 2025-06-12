@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Attendance Portal</title>
+    <link rel="stylesheet" href="atti_css.css">
+</head>
+<body>
+    <div class="container">
+        <h1>COLLEGE ATTENDANCE SYSTEM</h1>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="attendance">MARK ATTENDANCE</button>
+            <button class="tab-button" data-tab="history">ATTENDANCE HISTORY</button>
+            <button class="tab-button" data-tab="summary">MONTHLY SUMMARY</button>
+            <button class="tab-button" data-tab="students">MANAGE STUDENTS</button> </div>
+
+        <div id="attendanceContainer" class="tab-content">
+            <h2>MARK ATTENDANCE</h2>
+            <div class="datetime-box">
+                <strong>CURRENT DATE:</strong> <span id="currentDate"></span><br>
+                <strong>CURRENT TIME:</strong> <span id="currentTime"></span>
+            </div>
+            <div class="form-group">
+                <label for="currentYearSelect">SELECT ACADEMIC YEAR:</label>
+                <select id="currentYearSelect">
+                    <option value="1ST YEAR">1ST YEAR</option>
+                    <option value="2ND YEAR">2ND YEAR</option>
+                    <option value="3RD YEAR">3RD YEAR</option>
+                    <option value="4TH YEAR">4TH YEAR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="academicYearPrefixSelect">SELECT ACADEMIC YEAR PREFIX:</label>
+                <div class="input-with-button">
+                    <select id="academicYearPrefixSelect">
+                        </select>
+                    <button id="addAcademicYearPrefixBtn">ADD NEW PREFIX</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sectionSelect">SELECT SECTION:</label>
+                <select id="sectionSelect">
+                    <option value="itA">IT-A</option>
+                    <option value="itB">IT-B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="facultySelect">SELECT FACULTY:</label>
+                <div class="input-with-button">
+                    <select id="facultySelect">
+                        <option value="">-- SELECT FACULTY --</option>
+                        <option value="Other">OTHER</option>
+                    </select>
+                    <button id="editFacultyListBtn">EDIT FACULTY LIST</button>
+                </div>
+                <div id="otherFacultyInputContainer">
+                    <input type="text" id="otherFacultyName" placeholder="ENTER FACULTY NAME">
+                </div>
+            </div>
+
+            <h3 id="sectionHeading" style="text-align: center; margin-top: 30px;"></h3>
+            <div id="studentList">
+                </div>
+            <button id="submitAttendance">SUBMIT ATTENDANCE</button>
+            <div id="submissionMessage" class="message"></div>
+        </div>
+
+        <div id="historyContainer" class="tab-content">
+            <h2>ATTENDANCE HISTORY</h2>
+            <div class="filter-group">
+                <label for="historyAcademicYearSelect">SELECT ACADEMIC YEAR:</label>
+                <select id="historyAcademicYearSelect">
+                    <option value="All">ALL YEARS</option>
+                    <option value="1ST YEAR">1ST YEAR</option>
+                    <option value="2ND YEAR">2ND YEAR</option>
+                    <option value="3RD YEAR">3RD YEAR</option>
+                    <option value="4TH YEAR">4TH YEAR</option>
+                </select>
+            </div>
+             <div class="filter-group">
+                <label for="historyAcademicYearPrefixSelect">SELECT ACADEMIC YEAR PREFIX:</label>
+                <select id="historyAcademicYearPrefixSelect">
+                    <option value="All">ALL PREFIXES</option>
+                    </select>
+            </div>
+            <div class="filter-group">
+                <label for="historyFilterSection">SELECT SECTION:</label>
+                <select id="historyFilterSection">
+                    <option value="All">ALL SECTIONS</option>
+                    <option value="IT-A">IT-A</option>
+                    <option value="IT-B">IT-B</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="historyYearSelect">SELECT CALENDAR YEAR:</label>
+                <select id="historyYearSelect">
+                    <option value="All">ALL YEARS</option>
+                    </select>
+            </div>
+            <div class="filter-group">
+                <label for="historyDateSelect">SELECT DATE:</label>
+                <input type="date" id="historyDateSelect">
+            </div>
+
+            <button id="downloadAllHistoryBtn">DOWNLOAD ALL HISTORY (CSV)</button>
+            <div id="attendanceHistoryDisplayBox">
+                <p>No attendance records found.</p>
+            </div>
+        </div>
+
+        <div id="summaryContainer" class="tab-content">
+            <h2>MONTHLY ATTENDANCE SUMMARY</h2>
+            <div id="monthlySummaryFilters">
+                <div>
+                    <label for="summaryAcademicYearSelect">SELECT ACADEMIC YEAR:</label>
+                    <select id="summaryAcademicYearSelect">
+                        <option value="All">ALL YEARS</option>
+                        <option value="1ST YEAR">1ST YEAR</option>
+                        <option value="2ND YEAR">2ND YEAR</option>
+                        <option value="3RD YEAR">3RD YEAR</option>
+                        <option value="4TH YEAR">4TH YEAR</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="summaryAcademicYearPrefixSelect">SELECT ACADEMIC YEAR PREFIX:</label>
+                    <select id="summaryAcademicYearPrefixSelect">
+                        <option value="All">ALL PREFIXES</option>
+                        </select>
+                </div>
+                <div>
+                    <label for="summarySectionSelect">SELECT SECTION:</label>
+                    <select id="summarySectionSelect">
+                        <option value="All">ALL SECTIONS</option>
+                        <option value="IT-A">IT-A</option>
+                        <option value="IT-B">IT-B</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="summaryMonthSelect">SELECT MONTH:</label>
+                    <select id="summaryMonthSelect">
+                        <option value="">-- SELECT MONTH --</option>
+                        <option value="01">JANUARY</option>
+                        <option value="02">FEBRUARY</option>
+                        <option value="03">MARCH</option>
+                        <option value="04">APRIL</option>
+                        <option value="05">MAY</option>
+                        <option value="06">JUNE</option>
+                        <option value="07">JULY</option>
+                        <option value="08">AUGUST</option>
+                        <option value="09">SEPTEMBER</option>
+                        <option value="10">OCTOBER</option>
+                        <option value="11">NOVEMBER</option>
+                        <option value="12">DECEMBER</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="summaryYearForMonthSelect">SELECT CALENDAR YEAR:</label>
+                    <select id="summaryYearForMonthSelect">
+                        <option value="">-- SELECT YEAR --</option>
+                        </select>
+                </div>
+            </div>
+            <button id="generateMonthlySummary">GENERATE MONTHLY SUMMARY</button>
+            <div id="monthlySummaryMessage" class="message" style="margin-top:15px;"></div>
+        </div>
+
+        <div id="studentsContainer" class="tab-content">
+            <h2>MANAGE STUDENTS</h2>
+            <div class="manage-students-filters">
+                <div class="form-group">
+                    <label for="manageAcademicYearSelect">SELECT ACADEMIC YEAR:</label>
+                    <select id="manageAcademicYearSelect">
+                        <option value="1ST YEAR">1ST YEAR</option>
+                        <option value="2ND YEAR">2ND YEAR</option>
+                        <option value="3RD YEAR">3RD YEAR</option>
+                        <option value="4TH YEAR">4TH YEAR</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="manageAcademicYearPrefixSelect">SELECT ACADEMIC YEAR PREFIX:</label>
+                    <select id="manageAcademicYearPrefixSelect">
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="manageSectionSelect">SELECT SECTION:</label>
+                    <select id="manageSectionSelect">
+                        <option value="itA">IT-A</option>
+                        <option value="itB">IT-B</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="student-management-controls">
+                <div class="add-item-input">
+                    <input type="text" id="newStudentRollNoInput" placeholder="ENTER NEW ROLL NUMBER">
+                    <button id="addStudentBtn">ADD STUDENT</button>
+                </div>
+            </div>
+
+            <h3 id="manageSectionHeading" style="text-align: center; margin-top: 30px;"></h3>
+            <div id="managedStudentList">
+                <p>SELECT ACADEMIC YEAR, PREFIX, AND SECTION TO MANAGE STUDENTS.</p>
+                </div>
+             <div id="studentManagementMessage" class="message"></div>
+        </div>
+
+
+    </div>
+
+    <div id="welcomeModalOverlay" class="modal-overlay active">
+        <div class="modal-content">
+            <h3>WELCOME TO THE INFORMATION TECHNOLOGY ATTENDANCE PORTAL</h3>
+            <div class="modal-buttons">
+                <button id="closeWelcomeModal">START MARKING ATTENDANCE</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editAttendanceModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3>EDIT ATTENDANCE RECORD</h3>
+            <div id="editRecordDetails">
+                </div>
+            <div id="editableStudentList">
+                </div>
+            <div class="modal-buttons">
+                <button id="cancelEditAttendance">CANCEL</button>
+                <button id="saveEditedAttendance">SAVE CHANGES</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editFacultyModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3>EDIT FACULTY LIST</h3>
+            <div id="facultyListContainer">
+                <h4>EXISTING FACULTIES:</h4>
+                <div id="currentFacultyList">
+                    </div>
+                <div class="add-item-input">
+                    <input type="text" id="newFacultyNameInput" placeholder="ENTER NEW FACULTY NAME">
+                    <button id="addNewFacultyBtn">ADD FACULTY</button>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="closeFacultyModal">CLOSE</button>
+                </div>
+        </div>
+    </div>
+
+    <div id="addPrefixModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3>MANAGE ACADEMIC YEAR PREFIXES</h3>
+            <div id="prefixListContainer">
+                <h4>EXISTING PREFIXES:</h4>
+                <div id="currentPrefixList">
+                    </div>
+                <div class="add-item-input">
+                    <input type="text" id="newPrefixInput" placeholder="E.G., 25KN1A">
+                    <button id="addNewPrefixBtnModal">ADD PREFIX</button>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="closePrefixModal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="editStudentModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3>EDIT STUDENT ROLL NUMBER</h3>
+            <p>EDIT ROLL NUMBER FOR: <span id="currentRollNumberForEdit"></span></p>
+            <div class="form-group">
+                <label for="editedRollNumberInput">NEW ROLL NUMBER:</label>
+                <input type="text" id="editedRollNumberInput" placeholder="ENTER NEW ROLL NUMBER">
+            </div>
+            <div id="editStudentMessage" class="message"></div>
+            <div class="modal-buttons">
+                <button id="cancelEditStudentBtn">CANCEL</button>
+                <button id="saveEditedStudentBtn">SAVE CHANGES</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="atti_js.js"></script>
+</body>
+</html>

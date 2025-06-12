@@ -1,0 +1,701 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f2f7; /* Light Blue */
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cce7ee;
+}
+
+h1, h2, h3 {
+    color: #007bff; /* Primary Blue */
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0f2f7;
+    flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+}
+
+.tab-button {
+    background-color: #eaf5ff; /* Lighter Blue */
+    border: none;
+    padding: 14px 30px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    color: #0056b3;
+    position: relative;
+    top: 2px; /* For the active tab effect */
+    flex-grow: 1; /* Allow tabs to grow and fill space */
+    max-width: 25%; /* Limit maximum width for smaller screens */
+    margin-bottom: 10px; /* Space between wrapped tabs */
+}
+
+.tab-button:hover {
+    background-color: #d1e7ff; /* Even Lighter Blue */
+    color: #004085;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+}
+
+.tab-button.active {
+    background-color: #007bff; /* Primary Blue */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    transform: translateY(0);
+    border-bottom: 2px solid #007bff; /* Match color */
+    z-index: 1;
+}
+
+.tab-content {
+    display: none;
+    padding: 25px 0;
+    border-top: none; /* Removed as border is on tabs */
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-group, .filter-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #444;
+    font-size: 1.05em;
+}
+
+select, input[type="text"], input[type="date"] {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid #b3d9f1; /* Light Blue Border */
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f8fcfd; /* Off-white background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus, input[type="text"]:focus, input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.input-with-button {
+    display: flex;
+    align-items: stretch; /* Make items stretch to fill height */
+    gap: 10px;
+}
+
+.input-with-button select,
+.input-with-button input[type="text"] {
+    flex-grow: 1;
+    margin-right: 0; /* Remove margin as gap handles it */
+}
+
+.input-with-button button {
+    padding: 10px 20px;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.input-with-button button:hover {
+    background-color: #218838; /* Darker Green */
+    transform: translateY(-1px);
+}
+
+#otherFacultyInputContainer {
+    display: none;
+    margin-top: 15px;
+    width: 100%;
+}
+
+#studentList, #editableStudentList, #managedStudentList { /* Added #managedStudentList */
+    border: 1px solid #d1e7ff; /* Light Blue Border */
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 450px;
+    overflow-y: auto;
+    background-color: #fdfdfd;
+    margin-bottom: 25px;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.student-item, .student-edit-item, .managed-student-item { /* Added .managed-student-item */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0f2f7; /* Light Blue Separator */
+}
+
+.student-item:last-child, .student-edit-item:last-child, .managed-student-item:last-child { /* Added .managed-student-item */
+    border-bottom: none;
+}
+
+.roll-number, .roll-number-edit, .managed-roll-number { /* Added .managed-roll-number */
+    font-weight: 600;
+    color: #0056b3;
+    width: 160px; /* Fixed width for alignment */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.attendance-buttons, .status-radios {
+    display: flex;
+    gap: 10px;
+}
+
+.attendance-buttons button, .status-radios label {
+    padding: 10px 18px;
+    border: 1px solid transparent; /* Start with transparent border */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Present button */
+.attendance-buttons button.present-btn, .status-radios input[value="PRESENT"] + label {
+    background-color: #e6ffe6; /* Very light green */
+    color: #007bff; /* Primary blue for text */
+    border-color: #007bff; /* Border for active */
+}
+.attendance-buttons button.present-btn.active, .status-radios input[value="PRESENT"]:checked + label {
+    background-color: #28a745; /* Green */
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+.attendance-buttons button.present-btn:not(.active):hover {
+    background-color: #d4f8d4; /* Lighter hover */
+    border-color: #28a745;
+}
+
+/* Absent button */
+.attendance-buttons button.absent-btn, .status-radios input[value="ABSENT"] + label {
+    background-color: #ffe6e6; /* Very light red */
+    color: #dc3545; /* Red */
+    border-color: #dc3545; /* Border for active */
+}
+.attendance-buttons button.absent-btn.active, .status-radios input[value="ABSENT"]:checked + label {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border-color: #dc3545;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+.attendance-buttons button.absent-btn:not(.active):hover {
+    background-color: #fddddd; /* Lighter hover */
+    border-color: #dc3545;
+}
+
+.status-radios input[type="radio"] {
+    display: none; /* Hide default radio button */
+}
+
+button {
+    background-color: #007bff; /* Primary Blue */
+    color: white;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    width: auto;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker Blue */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+#submitAttendance {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #00a0e6; /* Brighter Blue */
+}
+#submitAttendance:hover {
+    background-color: #007bbd;
+}
+
+/* Animated Date/Time Display */
+.datetime-box {
+    background-color: #eaf5ff; /* Light Blue */
+    border: 1px solid #cce7ee;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.8s ease-out forwards;
+}
+
+.datetime-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0,123,255,0.1), rgba(0,170,255,0.05));
+    border-radius: 10px;
+    z-index: 0;
+}
+.datetime-box strong {
+    display: block;
+    font-size: 1.2em;
+    color: #0056b3;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+}
+.datetime-box span {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #007bff;
+    position: relative;
+    z-index: 1;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    display: none; /* Hidden by default */
+    font-size: 1.05em;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+}
+
+/* History Section Styles */
+#attendanceHistoryDisplayBox {
+    margin-top: 25px;
+    border: 1px solid #d1e7ff;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+    background-color: #fdfdfd;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.history-entry {
+    background-color: #f9f9f9;
+    border: 1px solid #e0f2f7;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.history-entry:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.history-entry strong {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.history-entry pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+    background-color: #eaf5ff; /* Lighter background for code */
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    margin-top: 10px;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px dashed #b3d9f1;
+}
+
+.history-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.history-actions button {
+    padding: 9px 18px;
+    font-size: 14px;
+    margin-top: 0;
+    box-shadow: none; /* Override default button shadow */
+}
+.history-actions button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.history-actions .edit-single-btn { background-color: #ffc107; color: #333; } /* Yellow */
+.history-actions .edit-single-btn:hover { background-color: #e0a800; }
+.history-actions .delete-single-btn { background-color: #dc3545; } /* Red */
+.history-actions .delete-single-btn:hover { background-color: #c82333; }
+.history-actions .download-single-btn { background-color: #17a2b8; } /* Cyan */
+.history-actions .download-single-btn:hover { background-color: #138496; }
+
+
+/* Monthly Summary Section */
+#monthlySummaryFilters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #e0f2f7;
+    border-radius: 10px;
+    background-color: #f9fdfd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+#generateMonthlySummary {
+    background-color: #00a0e6;
+}
+#generateMonthlySummary:hover {
+    background-color: #007bbd;
+}
+
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    max-width: 650px;
+    width: 90%;
+    transform: scale(0.8) translateY(-30px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease-out;
+    position: relative;
+    border: 1px solid #cce7ee;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.modal-buttons button {
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-top: 0;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+#closeWelcomeModal {
+    background-color: #007bff;
+}
+#closeWelcomeModal:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#cancelEditAttendance, #closeFacultyModal, #closePrefixModal, #cancelEditStudentBtn { /* Added #cancelEditStudentBtn */
+    background-color: #6c757d; /* Gray */
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.2);
+}
+#cancelEditAttendance:hover, #closeFacultyModal:hover, #closePrefixModal:hover, #cancelEditStudentBtn:hover { /* Added #cancelEditStudentBtn */
+    background-color: #5a6268;
+}
+
+#saveEditedAttendance, #saveFacultyList, #addNewPrefixBtnModal, #saveEditedStudentBtn, #addStudentBtn { /* Added #saveEditedStudentBtn, #addStudentBtn */
+    background-color: #28a745; /* Green */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+#saveEditedAttendance:hover, #saveFacultyList:hover, #addNewPrefixBtnModal:hover, #saveEditedStudentBtn:hover, #addStudentBtn:hover { /* Added #saveEditedStudentBtn, #addStudentBtn */
+    background-color: #218838;
+}
+
+#editRecordDetails {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed #a0d0ff;
+    margin-bottom: 25px;
+    font-size: 0.95em;
+    line-height: 1.8;
+    color: #333;
+}
+#editRecordDetails strong {
+    color: #0056b3;
+}
+
+#facultyListContainer, #prefixListContainer, #managedStudentList { /* #managedStudentList is also a container */
+    max-height: 350px;
+    overflow-y: auto;
+    border: 1px solid #d1e7ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+}
+#facultyListContainer h4, #prefixListContainer h4, #managedStudentList h4 { /* #managedStudentList can have a heading */
+    margin-top: 0;
+    color: #007bff;
+    font-size: 1.2em;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.faculty-item, .prefix-item, .managed-student-item { /* Unified styling for list items */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e0f2f7;
+}
+.faculty-item:last-child, .prefix-item:last-child, .managed-student-item:last-child {
+    border-bottom: none;
+}
+.faculty-item span, .prefix-item span, .managed-student-item span {
+    font-weight: 400;
+    color: #333;
+    font-size: 1.05em;
+}
+.faculty-item button, .prefix-item button, .managed-student-item button {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: none; /* Override default button shadow */
+}
+.faculty-item button:hover, .prefix-item button:hover, .managed-student-item button:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.managed-student-item .student-actions button { /* Specific styles for student actions */
+    background-color: #007bff; /* Blue for edit */
+    margin-left: 5px; /* Space between edit/delete */
+}
+.managed-student-item .student-actions button.delete-student-btn {
+    background-color: #dc3545; /* Red for delete */
+}
+.managed-student-item .student-actions button:hover {
+    background-color: #0056b3;
+}
+.managed-student-item .student-actions button.delete-student-btn:hover {
+    background-color: #c82333;
+}
+
+.add-item-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.add-item-input input {
+    flex-grow: 1;
+}
+.add-item-input button {
+    margin-top: 0;
+    padding: 10px 20px;
+    background-color: #007bff; /* Changed add button to blue by default */
+}
+.add-item-input button:hover {
+    background-color: #0056b3;
+}
+
+#editFacultyListBtn, #addAcademicYearPrefixBtn {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #6c757d; /* Gray */
+    font-size: 15px;
+    box-shadow: none;
+}
+#editFacultyListBtn:hover, #addAcademicYearPrefixBtn:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* New Student Management Section Styles */
+.manage-students-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #e0f2f7;
+    border-radius: 10px;
+    background-color: #f9fdfd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.student-management-controls {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0f2f7;
+    padding-bottom: 20px;
+}
+.student-management-controls .add-item-input button {
+    background-color: #28a745; /* Green for add student */
+}
+.student-management-controls .add-item-input button:hover {
+    background-color: #218838;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    .tab-button {
+        padding: 10px 15px;
+        font-size: 15px;
+        max-width: 100%; /* Full width on small screens */
+    }
+    .input-with-button {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .input-with-button button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .student-item, .managed-student-item { /* Added .managed-student-item */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .attendance-buttons, .student-actions { /* Added .student-actions */
+        width: 100%;
+        justify-content: center;
+    }
+    .roll-number, .managed-roll-number { /* Added .managed-roll-number */
+        width: auto;
+    }
+    .modal-content {
+        padding: 25px 30px;
+    }
+    .modal-buttons {
+        flex-direction: column;
+    }
+    .modal-buttons button {
+        width: 100%;
+    }
+    #monthlySummaryFilters, .manage-students-filters { /* Added .manage-students-filters */
+        grid-template-columns: 1fr;
+    }
+}
